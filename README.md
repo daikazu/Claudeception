@@ -23,9 +23,11 @@ git clone https://github.com/blader/claude-code-continuous-learning-skill.git .c
 ### Automatic Mode
 
 The skill activates automatically when Claude Code:
-- Completes a task that required significant debugging or investigation
-- Discovers a non-obvious solution or workaround
-- Learns something project-specific that isn't documented
+- Just completed debugging and discovered a non-obvious solution
+- Found a workaround through investigation or trial-and-error
+- Resolved an error where the root cause wasn't immediately apparent
+- Learned project-specific patterns or configurations through investigation
+- Completed any task where the solution required meaningful discovery
 
 ### Explicit Mode
 

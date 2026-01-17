@@ -1,19 +1,24 @@
 ---
 name: continuous-learning
 description: |
-  Continuous learning skill for Claude Code. Use when: (1) You complete a task that required 
-  discovering a non-obvious solution, workaround, or debugging technique, (2) You notice a 
-  pattern that could help with similar future tasks, (3) You learn something project-specific 
-  that isn't documented, (4) At the end of a work session when /retrospective is invoked.
-  This skill extracts reusable knowledge into new skills for future use.
+  Continuous learning system that monitors all user requests and interactions to identify
+  learning opportunities. Active during: (1) Every user request and task, (2) All coding
+  sessions and problem-solving activities, (3) When discovering solutions, patterns, or
+  techniques, (4) During /retrospective sessions. Automatically evaluates whether current
+  work contains valuable, reusable knowledge and creates new Claude Code skills when appropriate.
 author: Claude Code
-version: 1.0.0
+version: 2.4.0
 allowed-tools:
   - Read
   - Write
-  - Bash
+  - Edit
   - Grep
   - Glob
+  - WebSearch
+  - WebFetch
+  - Skill
+  - AskUserQuestion
+  - TodoWrite
 ---
 
 # Continuous Learning Skill
@@ -66,7 +71,51 @@ Analyze what was learned:
 - What would someone need to know to solve this faster next time?
 - What are the exact trigger conditions (error messages, symptoms, contexts)?
 
-### Step 2: Structure the Skill
+### Step 2: Research Best Practices (When Appropriate)
+
+Before creating the skill, search the web for current information when:
+
+**Always search for:**
+- Technology-specific best practices (frameworks, libraries, tools)
+- Current documentation or API changes
+- Common patterns or solutions for similar problems
+- Known gotchas or pitfalls in the problem domain
+- Alternative approaches or solutions
+
+**When to search:**
+- The topic involves specific technologies, frameworks, or tools
+- You're uncertain about current best practices
+- The solution might have changed after January 2025 (knowledge cutoff)
+- There might be official documentation or community standards
+- You want to verify your understanding is current
+
+**When to skip searching:**
+- Project-specific internal patterns unique to this codebase
+- Solutions that are clearly context-specific and wouldn't be documented
+- Generic programming concepts that are stable and well-understood
+- Time-sensitive situations where the skill needs to be created immediately
+
+**Search strategy:**
+```
+1. Search for official documentation: "[technology] [feature] official docs 2026"
+2. Search for best practices: "[technology] [problem] best practices 2026"
+3. Search for common issues: "[technology] [error message] solution 2026"
+4. Review top results and incorporate relevant information
+5. Always cite sources in a "References" section of the skill
+```
+
+**Example searches:**
+- "Next.js getServerSideProps error handling best practices 2026"
+- "Claude Code skill description semantic matching 2026"
+- "React useEffect cleanup patterns official docs 2026"
+
+**Integration with skill content:**
+- Add a "References" section at the end of the skill with source URLs
+- Incorporate best practices into the "Solution" section
+- Include warnings about deprecated patterns in the "Notes" section
+- Mention official recommendations where applicable
+
+### Step 3: Structure the Skill
 
 Create a new skill with this structure:
 
@@ -101,9 +150,12 @@ date: [YYYY-MM-DD]
 
 ## Notes
 [Any caveats, edge cases, or related considerations]
+
+## References
+[Optional: Links to official documentation, articles, or resources that informed this skill]
 ```
 
-### Step 3: Write Effective Descriptions
+### Step 4: Write Effective Descriptions
 
 The description field is critical for skill discovery. Include:
 
@@ -121,7 +173,7 @@ description: |
   Turborepo, and npm workspaces.
 ```
 
-### Step 4: Save the Skill
+### Step 5: Save the Skill
 
 Save new skills to the appropriate location:
 
@@ -173,6 +225,9 @@ Before finalizing a skill, verify:
 - [ ] Content is general enough to be reusable
 - [ ] No sensitive information (credentials, internal URLs) is included
 - [ ] Skill doesn't duplicate existing documentation or skills
+- [ ] Web research conducted when appropriate (for technology-specific topics)
+- [ ] References section included if web sources were consulted
+- [ ] Current best practices (post-2025) incorporated when relevant
 
 ## Anti-Patterns to Avoid
 
@@ -193,9 +248,22 @@ Skills should evolve:
 
 ## Example: Complete Extraction Flow
 
-**Scenario**: While debugging a Next.js app, you discover that `getServerSideProps` errors 
-aren't showing in the browser console because they're server-side, and the actual error is 
+**Scenario**: While debugging a Next.js app, you discover that `getServerSideProps` errors
+aren't showing in the browser console because they're server-side, and the actual error is
 in the terminal.
+
+**Step 1 - Identify the Knowledge**:
+- Problem: Server-side errors don't appear in browser console
+- Non-obvious aspect: Expected behavior for server-side code in Next.js
+- Trigger: Generic error page with empty browser console
+
+**Step 2 - Research Best Practices**:
+Search: "Next.js getServerSideProps error handling best practices 2026"
+- Found official docs on error handling
+- Discovered recommended patterns for try-catch in data fetching
+- Learned about error boundaries for server components
+
+**Step 3-5 - Structure and Save**:
 
 **Extraction**:
 
@@ -238,18 +306,45 @@ and line numbers.
 ## Notes
 - This applies to all server-side code in Next.js, not just data fetching
 - In development, Next.js sometimes shows a modal with partial error info
-- The `next.config.js` option `reactStrictMode` can cause double-execution 
+- The `next.config.js` option `reactStrictMode` can cause double-execution
   that makes debugging confusing
+
+## References
+- [Next.js Data Fetching: getServerSideProps](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props)
+- [Next.js Error Handling](https://nextjs.org/docs/pages/building-your-application/routing/error-handling)
 ```
 
 ## Integration with Workflow
 
-This skill should be invoked:
+### Automatic Trigger Conditions
 
-1. **Automatically**: When patterns suggest extractable knowledge (complex debugging, 
-   novel solutions)
-2. **Explicitly**: When user says `/retrospective`, "save this as a skill", or similar
-3. **Proactively**: Suggest extraction when high-value knowledge is evident
+Invoke this skill immediately after completing a task when ANY of these apply:
 
-Remember: The goal is continuous, autonomous improvement. Every valuable discovery 
+1. **Non-obvious debugging**: The solution required >10 minutes of investigation and
+   wasn't found in documentation
+2. **Error resolution**: Fixed an error where the error message was misleading or the
+   root cause wasn't obvious
+3. **Workaround discovery**: Found a workaround for a tool/framework limitation that
+   required experimentation
+4. **Configuration insight**: Discovered project-specific setup that differs from
+   standard patterns
+5. **Trial-and-error success**: Tried multiple approaches before finding what worked
+
+### Explicit Invocation
+
+Also invoke when:
+- User says `/retrospective` to review the session
+- User says "save this as a skill" or similar
+- User asks "what did we learn?"
+
+### Self-Check After Each Task
+
+After completing any significant task, ask yourself:
+- "Did I just spend meaningful time investigating something?"
+- "Would future-me benefit from having this documented?"
+- "Was the solution non-obvious from documentation alone?"
+
+If yes to any, invoke this skill immediately.
+
+Remember: The goal is continuous, autonomous improvement. Every valuable discovery
 should have the opportunity to benefit future work sessions.
