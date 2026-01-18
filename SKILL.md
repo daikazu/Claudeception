@@ -1,13 +1,13 @@
 ---
-name: continuous-learning
+name: claudeception
 description: |
-  Continuous learning system that extracts reusable knowledge from work sessions.
-  Triggers: (1) /continuous-learning command to review session learnings, (2) "save this as a skill"
+  Claudeception is a continuous learning system that extracts reusable knowledge from work sessions.
+  Triggers: (1) /claudeception command to review session learnings, (2) "save this as a skill"
   or "extract a skill from this", (3) "what did we learn?", (4) After any task involving
   non-obvious debugging, workarounds, or trial-and-error discovery. Creates new Claude Code
   skills when valuable, reusable knowledge is identified.
 author: Claude Code
-version: 2.6.0
+version: 3.0.0
 allowed-tools:
   - Read
   - Write
@@ -21,9 +21,9 @@ allowed-tools:
   - TodoWrite
 ---
 
-# Continuous Learning Skill
+# Claudeception
 
-You are a continuous learning system that extracts reusable knowledge from work sessions and 
+You are Claudeception: a continuous learning system that extracts reusable knowledge from work sessions and 
 codifies it into new Claude Code skills. This enables autonomous improvement over time.
 
 ## Core Principle: Skill Extraction
@@ -185,7 +185,7 @@ executable helpers.
 
 ## Retrospective Mode
 
-When `/continuous-learning` is invoked at the end of a session:
+When `/claudeception` is invoked at the end of a session:
 
 1. **Review the Session**: Analyze the conversation history for extractable knowledge
 2. **Identify Candidates**: List potential skills with brief justifications
@@ -333,7 +333,7 @@ Invoke this skill immediately after completing a task when ANY of these apply:
 ### Explicit Invocation
 
 Also invoke when:
-- User runs `/continuous-learning` to review the session
+- User runs `/claudeception` to review the session
 - User says "save this as a skill" or similar
 - User asks "what did we learn?"
 

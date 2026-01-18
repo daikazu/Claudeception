@@ -1,4 +1,4 @@
-# Claude Code Continuous Learning Skill
+# Claudeception
 
 Every time you use an AI coding agent, it starts from zero. You spend an hour debugging some obscure error, the agent figures it out, session ends. Next time you hit the same issue? Another hour.
 
@@ -11,13 +11,13 @@ This skill fixes that. When Claude Code discovers something non-obvious (a debug
 **User-level (recommended)**
 
 ```bash
-git clone https://github.com/blader/claude-code-continuous-learning-skill.git ~/.claude/skills/continuous-learning
+git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception
 ```
 
 **Project-level**
 
 ```bash
-git clone https://github.com/blader/claude-code-continuous-learning-skill.git .claude/skills/continuous-learning
+git clone https://github.com/blader/Claudeception.git .claude/skills/claudeception
 ```
 
 ### Step 2: Set up the activation hook (recommended)
@@ -28,8 +28,8 @@ The skill can activate via semantic matching, but a hook ensures it evaluates ev
 
 ```bash
 mkdir -p ~/.claude/hooks
-cp ~/.claude/skills/continuous-learning/scripts/continuous-learning-activator.sh ~/.claude/hooks/
-chmod +x ~/.claude/hooks/continuous-learning-activator.sh
+cp ~/.claude/skills/claudeception/scripts/claudeception-activator.sh ~/.claude/hooks/
+chmod +x ~/.claude/hooks/claudeception-activator.sh
 ```
 
 2. Add the hook to your Claude settings (`~/.claude/settings.json`):
@@ -42,7 +42,7 @@ chmod +x ~/.claude/hooks/continuous-learning-activator.sh
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/continuous-learning-activator.sh"
+            "command": "~/.claude/hooks/claudeception-activator.sh"
           }
         ]
       }
@@ -71,7 +71,7 @@ The skill activates automatically when Claude Code:
 Trigger a learning retrospective:
 
 ```
-/continuous-learning
+/claudeception
 ```
 
 Or explicitly request skill extraction:

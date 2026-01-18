@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Continuous Learning Skill Auto-Activation Hook
-# This hook ensures the continuous-learning skill evaluates every interaction
+# Claudeception Auto-Activation Hook
+# This hook ensures the claudeception skill evaluates every interaction
 # for extractable knowledge worth preserving.
 #
 # Installation:
 #   1. Copy this script to ~/.claude/hooks/
-#   2. Make it executable: chmod +x ~/.claude/hooks/continuous-learning-activator.sh
+#   2. Make it executable: chmod +x ~/.claude/hooks/claudeception-activator.sh
 #   3. Add to ~/.claude/settings.json (see README for details)
 
 cat << 'EOF'
@@ -15,7 +15,7 @@ cat << 'EOF'
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 CRITICAL: After completing this user request, you MUST evaluate whether
-it produced extractable knowledge using the continuous-learning skill.
+it produced extractable knowledge using the claudeception skill.
 
 EVALUATION PROTOCOL (NON-NEGOTIABLE):
 
@@ -26,13 +26,13 @@ EVALUATION PROTOCOL (NON-NEGOTIABLE):
    - Did I discover something not immediately obvious from documentation?
 
 3. IF YES to any question above:
-   ACTIVATE: Use Skill(continuous-learning) NOW to extract the knowledge
+   ACTIVATE: Use Skill(claudeception) NOW to extract the knowledge
 
 4. IF NO to all questions:
    SKIP: No skill extraction needed
 
 This is NOT optional. Failing to evaluate means valuable knowledge is lost.
-The continuous-learning skill will decide whether to actually create a new
+The claudeception skill will decide whether to actually create a new
 skill based on its quality criteria.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

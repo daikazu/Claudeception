@@ -4,7 +4,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Project Overview
 
-This is a **Claude Code skill** for continuous learning—it enables Claude Code to autonomously extract and preserve learned knowledge into reusable skills. It is not an application codebase but rather a skill definition with documentation and examples.
+Claudeception is a **Claude Code skill** for continuous learning—it enables Claude Code to autonomously extract and preserve learned knowledge into reusable skills. It is not an application codebase but rather a skill definition with documentation and examples.
 
 ## Key Files
 
